@@ -1,3 +1,5 @@
+# Aufgabe 1
+
 # Entwurfsmuster (Design Patterns)
 
 ## Definition
@@ -49,3 +51,49 @@ Mikroarchitektur beschreibt das detaillierte interne Design einzelner Softwareko
 - Objektinteraktionen und Schnittstellen
 - Interne Abläufe (z. B. Pipelining, Caching)
 Unterscheidet sich von Makroarchitektur (Systemstruktur).
+
+
+
+# Aufgabe 2
+
+# GoF Entwurfsmuster - Vertiefung
+
+## Chain of Responsibility (Verhaltensmuster)
+**Zweck**: Entkoppelt Sender von Empfänger. Anfrage läuft Kette entlang, bis Handler sie bearbeitet.
+**Struktur**: Handler-Interface → ConcreteHandler (setNext() + handleRequest())  
+**Beispiel**: Hilfesystem: Button → Dialog → Fenster → Anwendung  
+**Vorteile**: Flexibel, Handler-Reihenfolge runtime änderbar
+
+## Template Method (Verhaltensmuster)
+**Zweck**: Algorithmus-Skelett fixiert, Schritte überschreibbar. 
+**Struktur**: AbstractClass {
+  templateMethod() { step1(); step2(); step3(); }
+  abstract step2();
+}  
+**Beispiel**: HTTP-Request: connect() → send() → receive() → disconnect()  
+**Vorteile**: Code-Duplikation vermeidet "Hollywood Principle"
+
+## Decorator (Strukturmuster)
+**Zweck**: Dynamisch Funktionalität erweitern, transparent.  
+**Struktur**: Component → ConcreteComponent  
+Decorator → ConcreteDecorator (überschreibt + Component.call())  
+**Beispiel**: InputStream → BufferedInputStream → DataInputStream  
+**Vorteile**: Unbegrenzte Kombinationen statt Subklassen
+
+## Builder (Erzeugungsmuster)
+**Zweck**: Komplexe Objekte schrittweise, immutable Resultat. 
+**Struktur**: Product + Builder.setX().setY().build() → Director  
+**Beispiel**: MazeGame mit Room, Door fluenter Builder  
+**Vorteile**: Telescoping Constructor Problem lösen
+
+## Adapter (Strukturmuster)
+**Zweck**: Inkompatible Schnittstellen kompatibel machen.
+**Struktur**: Target-Interface → Adapter(request()) → Adaptee.specificRequest()  
+**Beispiel**: MediaPlayer (MP3) → Adapter (VLC) → AdvancedMedia  
+**Varianten**: Object Adapter (Komposition), Class Adapter (Vererbung)
+
+## Observer (Verhaltensmuster)
+**Zweck**: 1:n State-Änderungsbenachrichtigung. 
+**Struktur**: Subject(attach/detach/notify) → Observer.update()  
+**Beispiel**: WeatherData → Current/Statistic/Forecast Display  
+**Vorteile**: Loose Coupling, Publisher/Subscriber
